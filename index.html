@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bono 50% - OroBet</title>
   <meta name="description" content="Reclamá tu bono de bienvenida 50%. Atención personalizada por WhatsApp.">
+  
   <style>
     body {
       margin: 0;
@@ -12,50 +13,89 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: white;
     }
-    .hero {
-      position: relative;
-      width: 100%;
-      height: 100%;
+    .container {
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      background: rgba(20, 20, 20, 0.95);
+      border: 2px solid #f1c40f;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 0 25px rgba(241, 196, 15, 0.4);
     }
-    .hero a {
-      display: block;
+    .hero-img {
       width: 100%;
-      height: 100%;
-    }
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 20px;
       animation: shine 3s infinite alternate;
     }
     @keyframes shine {
       from { filter: brightness(1); }
-      to   { filter: brightness(1.2); }
+      to { filter: brightness(1.2) drop-shadow(0 0 8px #f1c40f); }
     }
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+    h2 {
+      margin: 0 0 15px 0;
+      color: #f1c40f;
+      text-transform: uppercase;
+      font-size: 26px;
+    }
+    .info-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px dashed #f1c40f;
+    }
+    .info-box p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+    .highlight {
+      color: #25D366;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 15px;
+      border-radius: 10px;
+      border: 2px solid #333;
+      font-size: 18px;
+      text-align: center;
+      margin-bottom: 15px;
+      outline: none;
+      background: #fff;
+      color: #000;
+    }
+    input:focus {
+      border-color: #f1c40f;
+    }
+    .btn-wa {
+      width: 100%;
+      padding: 18px;
       background: #25D366;
-      border-radius: 50%;
-      padding: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      z-index: 50;
-      animation: pulse 1.5s infinite;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: 0.3s;
     }
-    .whatsapp-float img {
-      width: 50px;
-      height: 50px;
-      display: block;
+    .btn-wa:hover {
+      background: #128c7e;
+      transform: scale(1.02);
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+    .footer-text {
+      font-size: 12px;
+      color: #777;
+      margin-top: 15px;
     }
   </style>
 
@@ -74,79 +114,51 @@
 </head>
 <body>
 
-<div class="hero">
-  <a href="#" onclick="confirmarWhatsApp(event)">
-    <img src="imagen.png" alt="Promo OroBet">
-  </a>
+<div class="container">
+  <img src="imagen.png" alt="OroBet Bono 50%" class="hero-img">
+  
+  <h2>¡Bono del 50% Activado!</h2>
+  
+  <div class="info-box">
+    <p>Carga mínima: <span class="highlight">$3.000</span></p>
+    <p>Pagos y Retiros en el acto las 24hs</p>
+  </div>
+
+  <input id="nombreCliente" type="text" placeholder="Ingresá tu nombre" required>
+  
+  <button onclick="irAWhatsApp()" class="btn-wa">
+    PEDIR MI USUARIO AHORA
+  </button>
+
+  <p class="footer-text">Prohibido para menores de 18 años.</p>
 </div>
 
-<a href="#" class="whatsapp-float" onclick="confirmarWhatsApp(event)">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-</a>
-
 <script>
-function confirmarWhatsApp(event) {
-  event.preventDefault();
-
-  // SEÑAL 1: Contacto inicial para el algoritmo
-  fbq('track', 'Contact');
-
-  if (confirm('¿Querés abrir WhatsApp para reclamar tu bono del 50%?')) {
-    
-    // Crear popup corregido para móvil
-    let popup = document.createElement("div");
-    popup.style.position = "fixed";
-    popup.style.top = "0";
-    popup.style.left = "0";
-    popup.style.width = "100%"; // Antes estaba al 50%
-    popup.style.height = "100%";
-    popup.style.background = "rgba(0,0,0,0.85)";
-    popup.style.display = "flex";
-    popup.style.justifyContent = "center";
-    popup.style.alignItems = "center";
-    popup.style.zIndex = "9999";
-
-    popup.innerHTML = `
-      <div style="background: white; padding: 30px 20px; border-radius: 15px; width: 85%; max-width: 350px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
-        <h3 style="margin-top:0; color:#111;">¡Felicidades!</h3>
-        <p style="color:#444; font-size:16px;">Ingresá tu nombre para recibir tu <b>Bono del 50%</b>:</p>
-        <input id="nombreCliente" type="text" placeholder="Tu nombre" 
-          style="width: 100%; box-sizing: border-box; padding: 15px; border-radius: 10px; border: 2px solid #eee; font-size: 18px; text-align: center; margin-bottom: 20px; outline: none;">
-        <button id="enviarWA" style="width: 100%; padding: 15px; background: #25D366; color: #fff; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; font-weight: bold; text-transform: uppercase;">
-          Reclamar en WhatsApp
-        </button>
-      </div>
-    `;
-
-    document.body.appendChild(popup);
-
-    // Foco automático al input para facilidad del usuario
-    document.getElementById("nombreCliente").focus();
-
-    document.getElementById("enviarWA").onclick = function () {
-      let nombre = document.getElementById("nombreCliente").value.trim();
-      
-      if (nombre === "") {
-        alert("Por favor ingresá tu nombre para continuar.");
-        return;
-      }
-
-      // SEÑAL 2: LEAD (Esto es lo que Andrómeda usa para optimizar)
-      fbq('track', 'Lead', {
-        content_name: 'Bono 50 Porcentaje',
-        value: 1.0,
-        currency: 'USD'
-      });
-
-      let mensaje = `Hola soy ${nombre}, quiero reclamar mi bono del 50%.`;
-      let url = "https://wa.me/5492235337262?text=" + encodeURIComponent(mensaje);
-
-      // Esperamos 400ms para asegurar que el píxel se envíe antes de redirigir
-      setTimeout(function(){
-        window.location.href = url;
-      }, 400);
-    };
+function irAWhatsApp() {
+  const inputNombre = document.getElementById("nombreCliente");
+  const nombre = inputNombre.value.trim();
+  
+  if (nombre === "") {
+    alert("Por favor, ingresá tu nombre para crear el usuario.");
+    inputNombre.focus();
+    return;
   }
+
+  // EVENTO DE CONVERSIÓN (LEAD)
+  fbq('track', 'Lead', {
+    content_name: 'Registro OroBet',
+    value: 1.0,
+    currency: 'USD'
+  });
+
+  // Mensaje personalizado solicitado
+  const mensaje = `¡Hola! Soy ${nombre}. Vi el bono del 50% y me interesa registrarme. ¿Me haces un usuario?`;
+  const url = "https://wa.me/5491125777562?text=" + encodeURIComponent(mensaje);
+
+  // Pequeña espera para que el Píxel mande el evento antes de salir de la página
+  setTimeout(function(){
+    window.location.href = url;
+  }, 400);
 }
 </script>
 
