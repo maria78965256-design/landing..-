@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bono 50% - OroBet</title>
-  <meta name="description" content="Reclamá tu bono de bienvenida 50%. Atención personalizada por WhatsApp.">
+  <meta name="description" content="Reclamá tu bono de bienvenida 50% en OroBet.">
   
   <style>
     body {
@@ -34,7 +34,7 @@
       width: 85%;
       max-width: 350px;
       padding: 30px;
-      border: 2px solid #f1c40f;
+      border: 2px solid #f1c40f; /* Dorado OroBet */
       border-radius: 20px;
       background: #111;
     }
@@ -52,7 +52,7 @@
       text-transform: uppercase;
     }
 
-    /* --- ESTILOS DE TU LANDING --- */
+    /* --- ESTILOS DE LA LANDING OROBET --- */
     .container {
       width: 90%;
       max-width: 400px;
@@ -62,7 +62,7 @@
       border-radius: 20px;
       padding: 25px;
       box-shadow: 0 0 25px rgba(241, 196, 15, 0.4);
-      display: none; /* Se oculta hasta que confirmen */
+      display: none; /* Oculto hasta confirmar */
     }
     .hero-img {
       width: 100%;
@@ -86,10 +86,6 @@
       border-radius: 12px;
       margin-bottom: 20px;
       border: 1px dashed #f1c40f;
-    }
-    .info-box p {
-      margin: 5px 0;
-      font-size: 16px;
     }
     .highlight {
       color: #25D366;
@@ -122,7 +118,6 @@
       text-transform: uppercase;
       transition: 0.3s;
     }
-    .btn-wa:hover { background: #128c7e; transform: scale(1.02); }
     .footer-text { font-size: 12px; color: #777; margin-top: 15px; }
   </style>
 
@@ -135,7 +130,7 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '2030642304504762');
+    fbq('init', '2030642304504762'); // Cambiar este ID si OroBet usa otro Píxel
     fbq('track', 'PageView');
   </script>
 </head>
@@ -143,59 +138,55 @@
 
 <div id="filtro-inicial">
   <div class="caja-filtro">
-    <h2 style="font-size: 22px;">¡BIENVENIDO A OroBet!</h2>
-    <p>Para ingresar al canal de WhatsApp y reclamar tu <b>Bono del 50%</b> confirmá que sos mayor de edad.</p>
+    <h2 style="font-size: 22px;">¡BIENVENIDO A ORO BET!</h2>
+    <p>Confirmá que sos mayor de edad para ingresar y reclamar tu <b>Bono del 50%</b> de hoy.</p>
     <button class="btn-entrar" onclick="confirmarIngreso()">SÍ, SOY MAYOR Y QUIERO EL BONO</button>
     <p style="font-size: 11px; margin-top: 15px; color: #555;">Acceso exclusivo para mayores de 18 años.</p>
   </div>
 </div>
 
 <div class="container" id="main-container">
-  <img src="imagen.png" alt="OroBet Bono 50%" class="hero-img">
-  
-  <h2>¡Bono del 50% Activado!</h2>
+  <img src="imagen.png" alt="OroBet Bono 50%" class="hero-img"> <h2>¡Bono 50% OroBet!</h2>
   
   <div class="info-box">
     <p>Carga mínima: <span class="highlight">$3.000</span></p>
-    <p>Pagos y Retiros en el acto las 24hs</p>
+    <p>Retiros rápidos las 24hs</p>
   </div>
 
-  <input id="nombreCliente" type="text" placeholder="Ingresá tu nombre" required>
+  <input id="nombreCliente" type="text" placeholder="Tu Nombre y Apellido" required>
   
   <button onclick="irAWhatsApp()" class="btn-wa">
-    PEDIR MI USUARIO AHORA
+    RECLAMAR MI USUARIO OROBET
   </button>
 
-  <p class="footer-text">Prohibido para menores de 18 años.</p>
+  <p class="footer-text">Juego responsable. +18 años.</p>
 </div>
 
 <script>
-// Función para el primer clic (Filtro)
 function confirmarIngreso() {
     document.getElementById('filtro-inicial').style.display = 'none';
     document.getElementById('main-container').style.display = 'block';
-    // No disparamos el Lead todavía, para que Meta no nos cobre por este clic
 }
 
-// Función para ir a WhatsApp (Aquí sí se cobra el Lead)
 function irAWhatsApp() {
   const inputNombre = document.getElementById("nombreCliente");
   const nombre = inputNombre.value.trim();
   
   if (nombre === "") {
-    alert("Por favor, ingresá tu nombre para crear el usuario.");
+    alert("Por favor, ingresá tu nombre.");
     inputNombre.focus();
     return;
   }
 
-  // RECIÉN ACÁ META CUENTA LA CONVERSIÓN
+  // EVENTO DE CONVERSIÓN PARA OROBET
   fbq('track', 'Lead', {
     content_name: 'Registro OroBet',
     value: 1.0,
     currency: 'USD'
   });
 
-  const mensaje = `¡Hola! Soy ${nombre}. Vi el bono del 50% y me interesa registrarme. ¿Me haces un usuario?`;
+  // MENSAJE PERSONALIZADO PARA OROBET
+  const mensaje = `¡Hola! Soy ${nombre}. Vi el anuncio de OroBet por el bono del 50%. ¿Me creas un usuario?`;
   const url = "https://wa.me/5492235337262?text=" + encodeURIComponent(mensaje);
 
   setTimeout(function(){
