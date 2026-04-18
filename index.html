@@ -16,7 +16,43 @@
       min-height: 100vh;
       font-family: 'Segoe UI', Arial, sans-serif;
       color: white;
+      overflow-x: hidden;
     }
+
+    /* --- FILTRO DE CONFIRMACIÓN (EL PASO EXTRA) --- */
+    #filtro-inicial {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #000;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .caja-filtro {
+      width: 85%;
+      max-width: 350px;
+      padding: 30px;
+      border: 2px solid #f1c40f;
+      border-radius: 20px;
+      background: #111;
+    }
+    .btn-entrar {
+      background: #f1c40f;
+      color: #000;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      text-transform: uppercase;
+    }
+
+    /* --- ESTILOS DE TU LANDING --- */
     .container {
       width: 90%;
       max-width: 400px;
@@ -26,6 +62,7 @@
       border-radius: 20px;
       padding: 25px;
       box-shadow: 0 0 25px rgba(241, 196, 15, 0.4);
+      display: none; /* Se oculta hasta que confirmen */
     }
     .hero-img {
       width: 100%;
@@ -72,9 +109,6 @@
       background: #fff;
       color: #000;
     }
-    input:focus {
-      border-color: #f1c40f;
-    }
     .btn-wa {
       width: 100%;
       padding: 18px;
@@ -88,15 +122,8 @@
       text-transform: uppercase;
       transition: 0.3s;
     }
-    .btn-wa:hover {
-      background: #128c7e;
-      transform: scale(1.02);
-    }
-    .footer-text {
-      font-size: 12px;
-      color: #777;
-      margin-top: 15px;
-    }
+    .btn-wa:hover { background: #128c7e; transform: scale(1.02); }
+    .footer-text { font-size: 12px; color: #777; margin-top: 15px; }
   </style>
 
   <script>
@@ -114,7 +141,16 @@
 </head>
 <body>
 
-<div class="container">
+<div id="filtro-inicial">
+  <div class="caja-filtro">
+    <h2 style="font-size: 22px;">¡BIENVENIDO A GOLDENLUCK!</h2>
+    <p>Para ingresar al canal de WhatsApp y reclamar tu <b>Bono del 50%</b> confirmá que sos mayor de edad.</p>
+    <button class="btn-entrar" onclick="confirmarIngreso()">SÍ, SOY MAYOR Y QUIERO EL BONO</button>
+    <p style="font-size: 11px; margin-top: 15px; color: #555;">Acceso exclusivo para mayores de 18 años.</p>
+  </div>
+</div>
+
+<div class="container" id="main-container">
   <img src="imagen.png" alt="OroBet Bono 50%" class="hero-img">
   
   <h2>¡Bono del 50% Activado!</h2>
@@ -134,6 +170,14 @@
 </div>
 
 <script>
+// Función para el primer clic (Filtro)
+function confirmarIngreso() {
+    document.getElementById('filtro-inicial').style.display = 'none';
+    document.getElementById('main-container').style.display = 'block';
+    // No disparamos el Lead todavía, para que Meta no nos cobre por este clic
+}
+
+// Función para ir a WhatsApp (Aquí sí se cobra el Lead)
 function irAWhatsApp() {
   const inputNombre = document.getElementById("nombreCliente");
   const nombre = inputNombre.value.trim();
@@ -144,18 +188,16 @@ function irAWhatsApp() {
     return;
   }
 
-  // EVENTO DE CONVERSIÓN (LEAD)
+  // RECIÉN ACÁ META CUENTA LA CONVERSIÓN
   fbq('track', 'Lead', {
-    content_name: 'Registro GoldenLuck',
+    content_name: 'Registro OroBet',
     value: 1.0,
     currency: 'USD'
   });
 
-  // Mensaje personalizado solicitado
   const mensaje = `¡Hola! Soy ${nombre}. Vi el bono del 50% y me interesa registrarme. ¿Me haces un usuario?`;
-  const url = "https://wa.me/5492235537262?text=" + encodeURIComponent(mensaje);
+  const url = "https://wa.me/5492235337262?text=" + encodeURIComponent(mensaje);
 
-  // Pequeña espera para que el Píxel mande el evento antes de salir de la página
   setTimeout(function(){
     window.location.href = url;
   }, 400);
